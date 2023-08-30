@@ -6,7 +6,11 @@ using UnityEngine.UI;
 
 public class Tile : MonoBehaviour
 {
-    
+    public List<Sprite> tileSprites;
+    public Image complementImage;
+    public TextMeshProUGUI complementText;
+
+    public GameObject FX;
     public enum TYPE
     {
         NORMAL,
@@ -81,6 +85,49 @@ public class Tile : MonoBehaviour
         
     }
 
+    public void SetSprite()
+    {
+        switch (type)
+        {
+            case TYPE.NORMAL:
+                image.sprite = tileSprites[0];
+                complementImage.gameObject.SetActive(false);
+                break;
+            case TYPE.OCA:
+                image.sprite = tileSprites[1];
+                complementImage.gameObject.SetActive(false);
+                break;
+            case TYPE.BRIDGE:
+                image.sprite = tileSprites[5];
+                complementImage.gameObject.SetActive(false);
+                break;
+            case TYPE.DELAY:
+                image.sprite = tileSprites[1];
+                complementText.text = "1";
+                complementImage.sprite = tileSprites[2];
+                break;
+            case TYPE.SUPERDELAY:
+                image.sprite = tileSprites[1];
+                complementText.text = "3";
+                complementImage.sprite = tileSprites[2];
+                break;
+            case TYPE.BACK:
+                image.sprite = tileSprites[3];
+                complementImage.gameObject.SetActive(false);
+                break;
+            case TYPE.PRISON:
+                image.sprite = tileSprites[1];
+                complementText.text = "3";
+                complementImage.sprite = tileSprites[2];
+                break;
+            case TYPE.DEAD:
+                image.sprite = tileSprites[4];
+                complementImage.gameObject.SetActive(false);
+                break;
+            default:
+                break;
+        }
+    }
     private int ParseIndexOnlyWaypoint(string waypointName)
     {
         int index = int.Parse(waypointName.Substring(waypointName.LastIndexOf("t") + 1));
@@ -99,7 +146,7 @@ public class Tile : MonoBehaviour
                 if (tileSequence.Contains(actualTile))
                 {
                     int index = tileSequence.IndexOf(actualTile);
-                    if (tileSequence[index] == 62)
+                    if (tileSequence[index] == 62 || tileSequence[index] == 0)
                     {
                         return 1;
                     }
@@ -134,13 +181,13 @@ public class Tile : MonoBehaviour
                 return -1;
             case TYPE.SUPERDELAY:
                 
-                return -2;
+                return -3;
             case TYPE.BACK:
                 
                 return 0;
             case TYPE.PRISON:
                 
-                return -2;
+                return -3;
             case TYPE.DEAD:
                 
                 return -100;

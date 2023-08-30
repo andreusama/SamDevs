@@ -108,6 +108,8 @@ public class BoardMovement : MonoBehaviour
         
         SortWayPoints();
         SortTileTypes();
+
+        ParseWaypoint("0");
     }
 
     public void Update()
@@ -233,50 +235,50 @@ public class BoardMovement : MonoBehaviour
             if (ocaAoca.Contains(i))
             {
                 waypoints[i].GetComponentInChildren<Tile>().SetType(Tile.TYPE.OCA);
-                waypoints[i].GetComponentInChildren<Tile>().SetColor(Color.blue);
+                //waypoints[i].GetComponentInChildren<Tile>().SetColor(Color.blue);
                 waypoints[i].GetComponentInChildren<Tile>().PushSequencePos(ocaAoca);
             }
             else if (bridgeTile.Contains(i))
             {
                 waypoints[i].GetComponentInChildren<Tile>().SetType(Tile.TYPE.BRIDGE);
-                waypoints[i].GetComponentInChildren<Tile>().SetColor(Color.cyan);
+                //waypoints[i].GetComponentInChildren<Tile>().SetColor(Color.cyan);
                 waypoints[i].GetComponentInChildren<Tile>().PushSequencePos(bridgeTile);
             }
             else if (i == delayTile)
             {
                 Debug.Log("Created DELAY in: " + i);
-                waypoints[i].GetComponentInChildren<Tile>().SetColor(new Color(148f,76f,0f,200f));
+                //waypoints[i].GetComponentInChildren<Tile>().SetColor(new Color(148f,76f,0f,200f));
                 waypoints[i].GetComponentInChildren<Tile>().SetType(Tile.TYPE.DELAY);
             }
             else if (i == superDelayTile)
             {
                 Debug.Log("Created SUPERDELAY in: " + i);
-                waypoints[i].GetComponentInChildren<Tile>().SetColor(Color.magenta);
+                //waypoints[i].GetComponentInChildren<Tile>().SetColor(Color.magenta);
                 waypoints[i].GetComponentInChildren<Tile>().SetType(Tile.TYPE.SUPERDELAY);
             }
             else if (i == backTile)
             {
-                waypoints[i].GetComponentInChildren<Tile>().SetColor(new Color(0, 45, 148f, 200f));
+                //waypoints[i].GetComponentInChildren<Tile>().SetColor(new Color(0, 45, 148f, 200f));
                 waypoints[i].GetComponentInChildren<Tile>().SetType(Tile.TYPE.BACK);
             }
             else if (i == prison)
             {
-                waypoints[i].GetComponentInChildren<Tile>().SetColor(Color.red);
+                //waypoints[i].GetComponentInChildren<Tile>().SetColor(Color.red);
                 waypoints[i].GetComponentInChildren<Tile>().SetType(Tile.TYPE.PRISON);
             }
             else if (i == deadTile)
             {
-                waypoints[i].GetComponentInChildren<Tile>().SetColor(Color.black);
+                //waypoints[i].GetComponentInChildren<Tile>().SetColor(Color.black);
                 waypoints[i].GetComponentInChildren<Tile>().SetType(Tile.TYPE.DEAD);
             }
             else
             {
-                waypoints[i].GetComponentInChildren<Tile>().SetColor(Color.grey);
+                //waypoints[i].GetComponentInChildren<Tile>().SetColor(Color.grey);
                 waypoints[i].GetComponentInChildren<Tile>().SetType(Tile.TYPE.NORMAL);
             }
 
-
-            waypoints[i].GetComponentInChildren<Tile>().SetNameText();
+            waypoints[i].GetComponentInChildren<Tile>().SetSprite();
+            //waypoints[i].GetComponentInChildren<Tile>().SetNameText();
         }
     }
 
