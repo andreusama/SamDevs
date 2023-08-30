@@ -88,36 +88,64 @@ public class Tile : MonoBehaviour
         return index;
     }
 
-    private int TileEffect(int actualTile)
+    public int TileEffect(int actualTile)
     {
         switch (type)
         {
             case TYPE.NORMAL:
                 
-                return 0;
+                return 1;
             case TYPE.OCA:
-                
-                return 1;
+                if (tileSequence.Contains(actualTile))
+                {
+                    int index = tileSequence.IndexOf(actualTile);
+                    if (tileSequence[index] == 62)
+                    {
+                        return 1;
+                    }
+                    else
+                    {
+                        return tileSequence[index + 1];
+                    }
+                }
+                else
+                {
+                    return 1;
+                }
             case TYPE.BRIDGE:
-                
-                return 1;
+                if (tileSequence.Contains(actualTile))
+                {
+                    int index = tileSequence.IndexOf(actualTile);
+                    if (index == 0)
+                    {
+                        return tileSequence[1];
+                    }
+                    else
+                    {
+                        return tileSequence[0];
+                    }
+                }
+                else
+                {
+                    return 1;
+                }
             case TYPE.DELAY:
                 
-                return 1;
+                return -1;
             case TYPE.SUPERDELAY:
                 
-                return 1;
+                return -2;
             case TYPE.BACK:
                 
-                return 1;
+                return 0;
             case TYPE.PRISON:
                 
-                return 1;
+                return -2;
             case TYPE.DEAD:
                 
-                return 1;
+                return -100;
             default:
-                return 0;
+                return 100;
         }
     }
 

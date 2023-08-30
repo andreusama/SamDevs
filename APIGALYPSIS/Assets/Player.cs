@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 [Serializable]
-class MovementState
+public class MovementState
 {
     //create a constructor and a destructor
     public MovementState()
@@ -17,15 +18,35 @@ class MovementState
     public enum State
     {
         READY,
-        MOVING,
-        TOSTOP,
-        STOPPED,
-        BLOCKED
+        PREBLOCKED,
+        BLOCKED,
+        POSTBLOCKED
     }
 
+    [SerializeField]
     public State state;
-    
-    public int turnsBlocked;
+
+    [SerializeField]
+    private int turnsBlocked;
+
+    public int TurnsBlocked
+    {
+        get { return turnsBlocked; }
+        set 
+        {
+            turnsBlocked = value;
+
+            if (value > 0 && state == State.READY)
+            {
+                Debug.Log("READY and turnsBlocked setted to : " + turnsBlocked);
+                state = State.PREBLOCKED;
+            }
+            else if (value == 0)
+            {
+                state = State.POSTBLOCKED;
+            }
+        }
+    }
 }
 
 public class Player : MonoBehaviour
@@ -42,6 +63,12 @@ public class Player : MonoBehaviour
     [SerializeField]
     private MovementState movementState = new MovementState();
 
+    public MovementState MovementState
+    {
+        get { return movementState; }
+        set { movementState = value; }
+    }
+
     public Vector3 newPosition = Vector3.zero;
     // Start is called before the first frame update
     void Start()
@@ -52,22 +79,18 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+    }
+
+    public void BlockUI()
+    {
         switch (movementState.state)
         {
-            case MovementState.State.READY:
-                
+            case MovementState.State.POSTBLOCKED:
+                this.transform.GetComponent<Image>().color = Color.green;
                 break;
-            case MovementState.State.MOVING:
-               
-                break;
-            case MovementState.State.TOSTOP:
-                
-                break;
-            case MovementState.State.STOPPED:
-                
-                break;
-            case MovementState.State.BLOCKED:
-                
+            case MovementState.State.PREBLOCKED:
+                this.transform.GetComponent<Image>().color = Color.red;
                 break;
             default:
                 break;

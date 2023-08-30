@@ -3244,20 +3244,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnLogic: {fileID: 837897903}
+  actualPhase: 0
   scene: 1
   waypoints: []
   wayPointsParent: {fileID: 168113043}
   Pig: {fileID: 1177846146}
+  aimWaypoint: 0
   rollButton: {fileID: 1930989067}
   diceResult: {fileID: 910908107}
   winIndicator: {fileID: 1943271052}
   ocaAoca: 
   bridgeTile: 
-  delayTile: 19
-  superDelayTile: 31
-  backTile: 42
-  prison: 52
-  deadTile: 58
+  delayTile: 18
+  superDelayTile: 30
+  backTile: 41
+  prison: 51
+  deadTile: 57
 --- !u!4 &837897902
 Transform:
   m_ObjectHideFlags: 0
@@ -3285,6 +3287,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11c2138248c795e41acdc28b9e0d3b90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameState: 0
+  actualPlayer: 0
   rollButton: {fileID: 1930989067}
   buttonText: {fileID: 257777684}
   turnText: {fileID: 136811958}
@@ -7663,7 +7667,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1930989068}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 837897901}
+        m_TargetAssemblyTypeName: BoardMovement, Assembly-CSharp
+        m_MethodName: TurnCallback
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1930989068
 MonoBehaviour:
   m_ObjectHideFlags: 0

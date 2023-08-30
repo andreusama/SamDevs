@@ -6,16 +6,28 @@ using UnityEngine.UI;
 
 public class TurnLogic : MonoBehaviour
 {
+    public enum GameState
+    {
+        START,
+        PLAYING,
+        TOEND,
+        END
+    }
+
+    public GameState gameState;
+    
     public enum TurnState
     {
         Player1,
         Player2,
     }
+
+    public TurnState actualPlayer;
     
     [SerializeField]
     private Button rollButton;
     [SerializeField]
-    private TextMeshProUGUI buttonText;
+    public TextMeshProUGUI buttonText;
 
     [SerializeField]
     private TextMeshProUGUI turnText;
@@ -24,13 +36,9 @@ public class TurnLogic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameState = GameState.PLAYING;
+        actualPlayer = TurnState.Player1;
         turnCount = 1;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     //create a function that increases the turn by 1
@@ -39,4 +47,5 @@ public class TurnLogic : MonoBehaviour
         turnCount++;
         turnText.text = "Turn: " + turnCount;
     }
+
 }
