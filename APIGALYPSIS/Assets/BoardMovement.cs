@@ -9,6 +9,8 @@ public class BoardMovement : MonoBehaviour
 {
     public TurnLogic turnLogic;
     private UIArt uiArt;
+    public GameObject TheGang;
+    public GameObject huntersGO;
     public enum TurnPhase
     {
         ACTING,
@@ -19,13 +21,24 @@ public class BoardMovement : MonoBehaviour
 
     [SerializeField]
     private TurnPhase actualPhase;
-    
+
+    public TurnPhase SetPhase(TurnPhase newPhase)
+    {
+        actualPhase = newPhase;
+        return actualPhase;
+    }
+        
+
     private int MAX_POS = 62; 
     public int scene;
     
     [SerializeField]
     private List<Transform> waypoints = new List<Transform>();
 
+    public List<Transform> GetWaypointList()
+    {
+        return waypoints;
+    }
     [SerializeField]
     private Transform wayPointsParent;
 
@@ -179,6 +192,11 @@ public class BoardMovement : MonoBehaviour
                         waypoints[bufferWaypoint + 1].GetComponentInChildren<Tile>().PlayTileFeedback();
 
                     turnLogic.buttonText.text = "MOVING...";
+                    
+                    //check if when we moving the tile changes state and is dead
+                    
+                    
+                    
                     Pig.transform.position = Vector3.Lerp(Pig.transform.position, waypoints[bufferWaypoint].position, 0.1f);
                 }
                 else
@@ -216,6 +234,7 @@ public class BoardMovement : MonoBehaviour
 
                 int blockCase = GetTileOfWaypoint(waypoints[aimWaypoint]).TileEffect(aimWaypoint, winIndicator);
 
+                int deadCase = GetTileOfWaypoint(waypoints[aimWaypoint]).TileEffect(aimWaypoint, winIndicator);
 
                 if (jumpCase != 1 && jumpCase >= 0)
                 {
@@ -224,33 +243,48 @@ public class BoardMovement : MonoBehaviour
                     if (CheckFinish(GetTileOfWaypoint(waypoints[aimWaypoint]).TileEffect(aimWaypoint, winIndicator)) == true)
                     {
                         if (turnLogic != null)
+                        {
+                            turnLogic.sucess = TurnLogic.Sucess.WIN;
                             turnLogic.gameState = TurnLogic.GameState.TOEND;
+                        }
                     }
                 }
 
-                if (blockCase < 0)
+                if (blockCase < 0 && blockCase != -100)
                 {
                     Debug.Log("Block case was: " + Mathf.Abs(blockCase));
                     Pig.transform.GetComponent<Player>().MovementState.TurnsBlocked += Mathf.Abs(blockCase);
                 }
 
+                if (deadCase == -100)
+                {
+                    if (turnLogic != null)
+                    {
+                        turnLogic.sucess = TurnLogic.Sucess.LOSE;
+                        turnLogic.gameState = TurnLogic.GameState.TOEND;
+                    }
+                }
 
                 actualPhase = TurnPhase.STOPPED;
                 break;
             case TurnPhase.STOPPED:
+                
                 if (turnLogic == null)
                     return;
                 
                 if (turnLogic.gameState == TurnLogic.GameState.TOEND)
                 {
+                    //take the tile we're on (last one) and set false the pigVisuals
+                    
                     turnLogic.gameState = TurnLogic.GameState.END;
-
                     TurnAction -= CreateDiceRoll;
                     TurnAction -= turnLogic.IncreaseTurn;
 
                     //NICE PLACE TO PUT THE FINISH GAME FEEDBACK
 
-                    Finish();
+                    
+                    Finish(turnLogic.sucess);
+
                     return;
                 }
                 
@@ -469,8 +503,11 @@ public class BoardMovement : MonoBehaviour
             //Pig.transform.GetComponent<Player>().BoardPos = newPosition;
             //Pig.transform.position = waypoints[newPosition].position;
             if(turnLogic != null)
+            {
+                turnLogic.sucess = TurnLogic.Sucess.WIN;
                 turnLogic.gameState = TurnLogic.GameState.TOEND;
-
+            }
+       
             SetBufferWaypoint(bufferWaypoint = (Pig.transform.GetComponent<Player>().BoardPos + 1));
             
             Pig.transform.GetComponent<Player>().MovementState.direction = MovementState.Direction.FORWARD;
@@ -520,10 +557,35 @@ public class BoardMovement : MonoBehaviour
         }
     }
 
-    private void Finish()
+    private void Finish(TurnLogic.Sucess sucess)
     {
-        if (winIndicator != null)
-            winIndicator.text = "APIGALYPSIS!";
+        Pig.SetActive(false);
+        
+        switch (sucess)
+        {
+            case TurnLogic.Sucess.NONE:
+                Debug.Log("Sucess was NOT SET");
+                break;
+            case TurnLogic.Sucess.WIN:
+                if (winIndicator != null)
+                    winIndicator.text = "APIGALYPSIS!";
+
+                huntersGO.gameObject.SetActive(false);
+                TheGang.gameObject.SetActive(true);
+                break;
+            case TurnLogic.Sucess.LOSE:
+                if (winIndicator != null)
+                    winIndicator.text = "DEAD!";
+
+                huntersGO.GetComponent<Hunters>().SetSpeed = 1.5f;
+                
+                break;
+            default:
+                break;
+        }
+        
+
+        
 
         return;
     }

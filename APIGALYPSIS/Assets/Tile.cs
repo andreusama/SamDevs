@@ -13,6 +13,8 @@ public class Tile : MonoBehaviour
     public GameObject complement;
 
     public GameObject FX;
+
+    public bool deadTile = false;
     public enum TYPE
     {
         NORMAL,
@@ -48,6 +50,20 @@ public class Tile : MonoBehaviour
 
     [SerializeField]
     private Image image;
+
+    public Image pigVisuals;
+    
+    public Image SetSprite(Sprite sprite, bool deleteDeco)
+    {
+        if (deleteDeco == true)
+        {
+            complement.SetActive(false);
+            pigVisuals.gameObject.SetActive(false);
+        }
+        
+        image.sprite = sprite;
+        return image;
+    }
 
     [SerializeField]
     private List<int> tileSequence;
@@ -102,8 +118,18 @@ public class Tile : MonoBehaviour
                 complement.gameObject.SetActive(false);
                 break;
             case TYPE.OCA:
-                image.sprite = tileSprites[1];
-                complement.gameObject.SetActive(false);
+                if (index == 62)
+                {
+                    image.sprite = tileSprites[1];
+                    complementText.text = "";
+                    complement.gameObject.SetActive(true);
+                    pigVisuals.gameObject.SetActive(true);
+                }
+                else
+                {
+                    image.sprite = tileSprites[1];
+                    complement.gameObject.SetActive(false);
+                }
                 break;
             case TYPE.BRIDGE:
                 image.sprite = tileSprites[5];
@@ -132,6 +158,7 @@ public class Tile : MonoBehaviour
                 complementImage.sprite = tileSprites[2];
                 break;
             case TYPE.DEAD:
+                deadTile = true;
                 image.sprite = tileSprites[4];
                 complement.gameObject.SetActive(false);
                 break;

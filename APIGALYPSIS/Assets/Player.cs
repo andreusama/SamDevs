@@ -100,6 +100,7 @@ public class Player : MonoBehaviour
                 //this.transform.GetComponent<Image>().color = Color.green;
                 break;
             case MovementState.State.PREBLOCKED:
+
                 //this.transform.GetComponent<Image>().color = Color.red;
                 break;
             default:

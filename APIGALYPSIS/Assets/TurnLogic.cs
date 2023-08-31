@@ -14,6 +14,15 @@ public class TurnLogic : MonoBehaviour
         END
     }
 
+    public enum Sucess
+    {
+        NONE,
+        WIN,
+        LOSE
+    }
+
+    public Sucess sucess;
+
     public GameState gameState;
     
     public enum TurnState
@@ -38,6 +47,7 @@ public class TurnLogic : MonoBehaviour
     {
         gameState = GameState.PLAYING;
         actualPlayer = TurnState.Player1;
+        sucess = Sucess.NONE;
         turnCount = 1;
     }
 
