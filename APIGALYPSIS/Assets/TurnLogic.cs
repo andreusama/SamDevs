@@ -44,6 +44,7 @@ public class TurnLogic : MonoBehaviour
     //create a function that increases the turn by 1
     public void IncreaseTurn()
     {
+        this.transform.GetComponent<UIArt>().PlayTurnChangeFeedbacks();
         turnCount++;
         turnText.text = "Turn: " + turnCount;
     }

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -7,7 +8,7 @@ using UnityEngine.UI;
 public class BoardMovement : MonoBehaviour
 {
     public TurnLogic turnLogic;
-    
+    private UIArt uiArt;
     public enum TurnPhase
     {
         ACTING,
@@ -33,7 +34,13 @@ public class BoardMovement : MonoBehaviour
     [SerializeField]
     private int aimWaypoint;
 
-    private float movingTime = 0.1f;
+    [SerializeField]
+    private int bufferWaypoint;
+
+    [SerializeField]
+    private float movingTime = 1f;
+
+    [SerializeField]
     private float timeCounter = 0f;
 
     [Header("Dice elements")]
@@ -57,29 +64,44 @@ public class BoardMovement : MonoBehaviour
     [SerializeField]
     private List<int> bridgeTile = new List<int>();
 
-    private int delayTile = 18;
+    private int delayTile = -1;
 
-    private int superDelayTile = 30;
+    private int superDelayTile = -1;
 
-    private int backTile = 41;
+    private int backTile = -1;
 
-    private int prison = 51;
+    private int prison = -1;
 
-    private int deadTile = 57;
+    private int deadTile = -1;
 
     // Start is called before the first frame update
     void Start()
     {
+        uiArt = this.transform.GetComponent<UIArt>();
         NewTurn(Pig);
 
-        turnLogic.buttonText.text = "ROLL THE DICE!";
+        if (turnLogic != null)
+            turnLogic.buttonText.text = "ROLL THE DICE!";
+        
         TurnAction += CreateDiceRoll;
-        TurnAction += turnLogic.IncreaseTurn;
+
+        if (turnLogic != null)
+            TurnAction += turnLogic.IncreaseTurn;
         
         //rollButton.onClick.AddListener(TurnAction);
 
-        if (scene == 1)
+        if (scene != 0)
         {
+            delayTile = 18;
+
+            superDelayTile = 30;
+
+            backTile = 41;
+
+            prison = 51;
+
+            deadTile = 57;
+    
             ocaAoca.Add(0);
             ocaAoca.Add(4);
             ocaAoca.Add(8);
@@ -109,9 +131,25 @@ public class BoardMovement : MonoBehaviour
         SortWayPoints();
         SortTileTypes();
 
-        ParseWaypoint("0");
+        
     }
 
+
+    //create a function to set the position directly without the need of the dice
+    public void InitPig(int pos)
+    {
+        Pig.SetActive(true);
+        if (pos > MAX_POS)
+        {
+            pos = MAX_POS;
+        }
+        else if (pos < 0)
+        {
+            pos = 0;
+        }
+        Pig.transform.position = waypoints[pos].position;
+        Pig.transform.GetComponent<Player>().BoardPos = pos;
+    }
     public void Update()
     {
         //create a debug where i press G 
@@ -131,27 +169,62 @@ public class BoardMovement : MonoBehaviour
                 
                 break;
             case TurnPhase.MOVING:
-                Pig.transform.position = Vector3.Lerp(Pig.transform.position, waypoints[aimWaypoint].position, 0.1f);
-                if (Vector3.Distance(Pig.transform.position, waypoints[aimWaypoint].position) < 0.1f)
+
+                //check if waypoints[bufferWaypoint].position is part of the collection or is out of range
+                if (Vector3.Distance(Pig.transform.position, waypoints[bufferWaypoint].position) > 0.1f)
                 {
-                    Pig.transform.GetComponent<Player>().BoardPos = aimWaypoint;
-                    actualPhase = TurnPhase.TOSTOP;
+                    if (Pig.transform.GetComponent<Player>().MovementState.direction == MovementState.Direction.FORWARD)
+                        waypoints[bufferWaypoint - 1].GetComponentInChildren<Tile>().PlayTileFeedback();
+                    else
+                        waypoints[bufferWaypoint + 1].GetComponentInChildren<Tile>().PlayTileFeedback();
+
+                    turnLogic.buttonText.text = "MOVING...";
+                    Pig.transform.position = Vector3.Lerp(Pig.transform.position, waypoints[bufferWaypoint].position, 0.1f);
                 }
+                else
+                {
+                    if (Vector3.Distance(Pig.transform.position, waypoints[aimWaypoint].position) < 0.1f)
+                    {
+                        Pig.transform.GetComponent<Player>().BoardPos = aimWaypoint;
+                        actualPhase = TurnPhase.TOSTOP;
+
+                        return;
+                    }
+
+                    if (Pig.transform.GetComponent<Player>().MovementState.direction == MovementState.Direction.FORWARD)
+                    {
+                        Debug.Log("Buffer waypoint increasing from MOVING" + bufferWaypoint);
+                        waypoints[bufferWaypoint].GetComponentInChildren<Tile>().PlayTileFeedback();
+
+                        bufferWaypoint++;
+                        SetBufferWaypoint(bufferWaypoint);
+                    }
+                    else
+                    {
+                        Debug.Log("Buffer waypoint decreasing from MOVING" + bufferWaypoint);
+                        waypoints[bufferWaypoint].GetComponentInChildren<Tile>().PlayTileFeedback();
+
+                        bufferWaypoint--;
+                        SetBufferWaypoint(bufferWaypoint);
+                    }
+                }
+
                 break;
             case TurnPhase.TOSTOP:
 
-                int jumpCase = GetTileOfWaypoint(waypoints[aimWaypoint]).TileEffect(aimWaypoint);
+                int jumpCase = GetTileOfWaypoint(waypoints[aimWaypoint]).TileEffect(aimWaypoint, winIndicator);
 
-                int blockCase = GetTileOfWaypoint(waypoints[aimWaypoint]).TileEffect(aimWaypoint);
+                int blockCase = GetTileOfWaypoint(waypoints[aimWaypoint]).TileEffect(aimWaypoint, winIndicator);
 
 
                 if (jumpCase != 1 && jumpCase >= 0)
                 {
-                    Pig.transform.position = waypoints[GetTileOfWaypoint(waypoints[aimWaypoint]).TileEffect(aimWaypoint)].position;
-                    Pig.transform.GetComponent<Player>().BoardPos = GetTileOfWaypoint(waypoints[aimWaypoint]).TileEffect(aimWaypoint);
-                    if (CheckFinish(GetTileOfWaypoint(waypoints[aimWaypoint]).TileEffect(aimWaypoint)) == true)
+                    Pig.transform.position = waypoints[GetTileOfWaypoint(waypoints[aimWaypoint]).TileEffect(aimWaypoint, winIndicator)].position;
+                    Pig.transform.GetComponent<Player>().BoardPos = GetTileOfWaypoint(waypoints[aimWaypoint]).TileEffect(aimWaypoint, winIndicator);
+                    if (CheckFinish(GetTileOfWaypoint(waypoints[aimWaypoint]).TileEffect(aimWaypoint, winIndicator)) == true)
                     {
-                        turnLogic.gameState = TurnLogic.GameState.TOEND;
+                        if (turnLogic != null)
+                            turnLogic.gameState = TurnLogic.GameState.TOEND;
                     }
                 }
 
@@ -165,7 +238,9 @@ public class BoardMovement : MonoBehaviour
                 actualPhase = TurnPhase.STOPPED;
                 break;
             case TurnPhase.STOPPED:
-
+                if (turnLogic == null)
+                    return;
+                
                 if (turnLogic.gameState == TurnLogic.GameState.TOEND)
                 {
                     turnLogic.gameState = TurnLogic.GameState.END;
@@ -179,12 +254,25 @@ public class BoardMovement : MonoBehaviour
                     return;
                 }
                 
+                
                 NewTurn(Pig);
                 
                 break;
             default:
                 break;
         }
+    }
+
+    //create a method that moves the pig from a waypoint x to a waypoint y
+    public void SetBufferWaypoint(int x)
+    {
+        if (x < 0 || x > MAX_POS)
+        {
+            Debug.LogError("The waypoint is out of range");
+            return;
+        }
+
+        bufferWaypoint = x;
     }
 
     public void TurnCallback()
@@ -194,9 +282,17 @@ public class BoardMovement : MonoBehaviour
 
     private void NewTurn(GameObject Pig)
     {
+        if (turnLogic == null)
+        {
+            return;
+        }
+
+        rollButton.interactable = true;
+
         switch (Pig.GetComponent<Player>().MovementState.state)
         {
             case MovementState.State.READY:
+                turnLogic.buttonText.text = "ROLL THE DICE!";
                 actualPhase = TurnPhase.ACTING;
                 break;
             case MovementState.State.PREBLOCKED:
@@ -235,50 +331,77 @@ public class BoardMovement : MonoBehaviour
             if (ocaAoca.Contains(i))
             {
                 waypoints[i].GetComponentInChildren<Tile>().SetType(Tile.TYPE.OCA);
-                //waypoints[i].GetComponentInChildren<Tile>().SetColor(Color.blue);
+
+                if (scene == 1)
+                    waypoints[i].GetComponentInChildren<Tile>().SetColor(Color.blue);
+
                 waypoints[i].GetComponentInChildren<Tile>().PushSequencePos(ocaAoca);
             }
             else if (bridgeTile.Contains(i))
             {
                 waypoints[i].GetComponentInChildren<Tile>().SetType(Tile.TYPE.BRIDGE);
-                //waypoints[i].GetComponentInChildren<Tile>().SetColor(Color.cyan);
+
+                if (scene == 1)
+                    waypoints[i].GetComponentInChildren<Tile>().SetColor(Color.cyan);
+
                 waypoints[i].GetComponentInChildren<Tile>().PushSequencePos(bridgeTile);
             }
             else if (i == delayTile)
             {
                 Debug.Log("Created DELAY in: " + i);
-                //waypoints[i].GetComponentInChildren<Tile>().SetColor(new Color(148f,76f,0f,200f));
+
+                if (scene == 1)
+                    waypoints[i].GetComponentInChildren<Tile>().SetColor(new Color(148f,76f,0f,200f));
+
                 waypoints[i].GetComponentInChildren<Tile>().SetType(Tile.TYPE.DELAY);
             }
             else if (i == superDelayTile)
             {
                 Debug.Log("Created SUPERDELAY in: " + i);
-                //waypoints[i].GetComponentInChildren<Tile>().SetColor(Color.magenta);
+
+                if (scene == 1)
+                    waypoints[i].GetComponentInChildren<Tile>().SetColor(Color.magenta);
+
                 waypoints[i].GetComponentInChildren<Tile>().SetType(Tile.TYPE.SUPERDELAY);
             }
             else if (i == backTile)
             {
-                //waypoints[i].GetComponentInChildren<Tile>().SetColor(new Color(0, 45, 148f, 200f));
+                if (scene == 1)
+                    waypoints[i].GetComponentInChildren<Tile>().SetColor(new Color(0, 45, 148f, 200f));
+                
                 waypoints[i].GetComponentInChildren<Tile>().SetType(Tile.TYPE.BACK);
             }
             else if (i == prison)
             {
-                //waypoints[i].GetComponentInChildren<Tile>().SetColor(Color.red);
+                if (scene == 1)
+                    waypoints[i].GetComponentInChildren<Tile>().SetColor(Color.red);
+                
                 waypoints[i].GetComponentInChildren<Tile>().SetType(Tile.TYPE.PRISON);
             }
             else if (i == deadTile)
             {
-                //waypoints[i].GetComponentInChildren<Tile>().SetColor(Color.black);
+                if (scene == 1)
+                    waypoints[i].GetComponentInChildren<Tile>().SetColor(Color.black);
+                
                 waypoints[i].GetComponentInChildren<Tile>().SetType(Tile.TYPE.DEAD);
             }
             else
             {
-                //waypoints[i].GetComponentInChildren<Tile>().SetColor(Color.grey);
+                if (scene == 0 || scene == 1)
+                    waypoints[i].GetComponentInChildren<Tile>().SetColor(Color.grey);
+                
                 waypoints[i].GetComponentInChildren<Tile>().SetType(Tile.TYPE.NORMAL);
             }
 
-            waypoints[i].GetComponentInChildren<Tile>().SetSprite();
-            //waypoints[i].GetComponentInChildren<Tile>().SetNameText();
+            if (scene == 0 || scene == 1)
+            {
+                waypoints[i].GetComponentInChildren<Tile>().SetNameText();
+                waypoints[i].GetComponentInChildren<Tile>().DisableSprite();
+            }
+            else
+            {
+                waypoints[i].GetComponentInChildren<Tile>().SetSprite();
+            }
         }
     }
 
@@ -328,7 +451,7 @@ public class BoardMovement : MonoBehaviour
         {
             int newPosition = Pig.transform.GetComponent<Player>().BoardPos + parsedNewWayPoint;
 
-            MovePigToWayPoint(newPosition);
+            SetPigNextMovement(newPosition);
         }
         else
         {
@@ -336,7 +459,7 @@ public class BoardMovement : MonoBehaviour
         }
     }
         
-    private void MovePigToWayPoint(int newPosition)
+    private void SetPigNextMovement(int newPosition)
     {
         //here we have two cases, if the newPosition is exactly the same as the MAX_POS we'll set the pig to the newPosition and show the win indicator
         //in the case that the newPosition is greater than the MAX_POS we'll set the pig to the substraction of the newPosition and the MAX_POS
@@ -345,7 +468,14 @@ public class BoardMovement : MonoBehaviour
         {
             //Pig.transform.GetComponent<Player>().BoardPos = newPosition;
             //Pig.transform.position = waypoints[newPosition].position;
-            turnLogic.gameState = TurnLogic.GameState.TOEND;
+            if(turnLogic != null)
+                turnLogic.gameState = TurnLogic.GameState.TOEND;
+
+            SetBufferWaypoint(bufferWaypoint = (Pig.transform.GetComponent<Player>().BoardPos + 1));
+            
+            Pig.transform.GetComponent<Player>().MovementState.direction = MovementState.Direction.FORWARD;
+            
+            Debug.Log("Setting buffer from Set Pig Next Movement MAX_POS CASE " + bufferWaypoint);
 
             aimWaypoint = newPosition;
             actualPhase = TurnPhase.MOVING;
@@ -360,25 +490,40 @@ public class BoardMovement : MonoBehaviour
             //Pig.transform.GetComponent<Player>().BoardPos = newPosition;
             //Pig.transform.position = waypoints[newPosition].position;
 
+            if (newPosition == Pig.transform.GetComponent<Player>().BoardPos)
+            {
+                SetBufferWaypoint(bufferWaypoint = Pig.transform.GetComponent<Player>().BoardPos);
+            }
+            else if (newPosition < Pig.transform.GetComponent<Player>().BoardPos)
+            {
+                Pig.transform.GetComponent<Player>().MovementState.direction = MovementState.Direction.BACKWARDS;
+                SetBufferWaypoint(bufferWaypoint = (Pig.transform.GetComponent<Player>().BoardPos - 1));
+            }
+            else if (newPosition > Pig.transform.GetComponent<Player>().BoardPos)
+            {
+                Pig.transform.GetComponent<Player>().MovementState.direction = MovementState.Direction.FORWARD;
+                SetBufferWaypoint(bufferWaypoint = (Pig.transform.GetComponent<Player>().BoardPos + 1));
+            }
+
+            Debug.Log("Setting buffer from Set Pig Next Movement REBOUND MAX_POS CASE " + bufferWaypoint);
             aimWaypoint = newPosition;
             actualPhase = TurnPhase.MOVING;
-            //Debug.Log("The Player is actually in: " + GetTileType(waypoints[newPosition]).ToString());
         }
         else
         {
-            //Pig.transform.GetComponent<Player>().BoardPos = newPosition;
-            //Pig.transform.position = waypoints[newPosition].position;
-            
+
+            SetBufferWaypoint(bufferWaypoint = (Pig.transform.GetComponent<Player>().BoardPos + 1));
+            Pig.transform.GetComponent<Player>().MovementState.direction = MovementState.Direction.FORWARD;
+            Debug.Log("Setting buffer from Set Pig Next Movement NORMAL CASE " + bufferWaypoint);
             aimWaypoint = newPosition;
             actualPhase = TurnPhase.MOVING;
-            //Debug.Log("The Player is actually in: " + GetTileType(waypoints[newPosition]).ToString());
         }
     }
 
     private void Finish()
     {
         if (winIndicator != null)
-            winIndicator.text = "APIGALYPSIS!!!!!";
+            winIndicator.text = "APIGALYPSIS!";
 
         return;
     }
@@ -411,10 +556,47 @@ public class BoardMovement : MonoBehaviour
         //create a random number between 1 and 6
         int diceRoll = Random.Range(1, 7);
         //set the dice result text to the dice roll
-        SetDiceResult(diceRoll.ToString());
 
+        turnLogic.buttonText.text = "ROLLING...";
+
+        StartCoroutine(AnimateDiceRoll(diceRoll));
+    }
+
+    //create a coroutine that just gets the text of the dice result and animate the number with random ones until it reaches the dice roll given as an argument
+    public IEnumerator AnimateDiceRoll(int diceRoll)
+    {
+        rollButton.interactable = false;
+        uiArt.PlayRollFeedback();
+        
+        string diceResultString = diceResult.text;
+
+        string result = "";
+
+        int random = 0;
+
+        int counter = 0;
+
+        while (counter < 10)
+        {
+            //get a random number between 1 and 6
+            random = Random.Range(1, 7);
+            //set the result to the random number
+            result = random.ToString();
+            //set the text of the dice result to the result
+            diceResult.text = result;
+            //wait for 0.1 seconds
+            yield return new WaitForSeconds(0.04f);
+            //increase the counter
+            counter++;
+            //if the counter is greater than 10
+        }
+
+        result = diceRoll.ToString();
+
+        
+        //set the text of the dice result to the dice roll
+        SetDiceResult(diceRoll.ToString());
         //set the pig to the waypoint position
         ParseWaypoint(diceRoll.ToString());
     }
-
 }

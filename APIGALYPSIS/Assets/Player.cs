@@ -1,3 +1,4 @@
+using MoreMountains.Tools;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,6 +26,14 @@ public class MovementState
 
     [SerializeField]
     public State state;
+
+    public enum Direction
+    {
+        FORWARD,
+        BACKWARDS
+    }
+
+    public Direction direction;
 
     [SerializeField]
     private int turnsBlocked;
@@ -73,6 +82,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        MovementState.direction = MovementState.Direction.FORWARD;
         boardPos = 0;
     }
 
@@ -87,10 +97,10 @@ public class Player : MonoBehaviour
         switch (movementState.state)
         {
             case MovementState.State.POSTBLOCKED:
-                this.transform.GetComponent<Image>().color = Color.green;
+                //this.transform.GetComponent<Image>().color = Color.green;
                 break;
             case MovementState.State.PREBLOCKED:
-                this.transform.GetComponent<Image>().color = Color.red;
+                //this.transform.GetComponent<Image>().color = Color.red;
                 break;
             default:
                 break;

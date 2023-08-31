@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using MoreMountains.Feedbacks;
 
 public class Tile : MonoBehaviour
 {
     public List<Sprite> tileSprites;
     public Image complementImage;
     public TextMeshProUGUI complementText;
+    public GameObject complement;
 
     public GameObject FX;
     public enum TYPE
@@ -50,6 +52,8 @@ public class Tile : MonoBehaviour
     [SerializeField]
     private List<int> tileSequence;
 
+    public MMFeedbacks tileFeedback;
+
     public void PushSequencePos(List<int> bridgeList)
     {
         foreach (int item in bridgeList)
@@ -85,44 +89,51 @@ public class Tile : MonoBehaviour
         
     }
 
+    public void DisableSprite()
+    {
+        image.sprite = null;
+    }
     public void SetSprite()
     {
         switch (type)
         {
             case TYPE.NORMAL:
                 image.sprite = tileSprites[0];
-                complementImage.gameObject.SetActive(false);
+                complement.gameObject.SetActive(false);
                 break;
             case TYPE.OCA:
                 image.sprite = tileSprites[1];
-                complementImage.gameObject.SetActive(false);
+                complement.gameObject.SetActive(false);
                 break;
             case TYPE.BRIDGE:
                 image.sprite = tileSprites[5];
-                complementImage.gameObject.SetActive(false);
+                complement.gameObject.SetActive(false);
                 break;
             case TYPE.DELAY:
                 image.sprite = tileSprites[1];
                 complementText.text = "1";
+                complement.gameObject.SetActive(true);
                 complementImage.sprite = tileSprites[2];
                 break;
             case TYPE.SUPERDELAY:
                 image.sprite = tileSprites[1];
                 complementText.text = "3";
+                complement.gameObject.SetActive(true);
                 complementImage.sprite = tileSprites[2];
                 break;
             case TYPE.BACK:
                 image.sprite = tileSprites[3];
-                complementImage.gameObject.SetActive(false);
+                complement.gameObject.SetActive(false);
                 break;
             case TYPE.PRISON:
                 image.sprite = tileSprites[1];
                 complementText.text = "3";
+                complement.gameObject.SetActive(true);
                 complementImage.sprite = tileSprites[2];
                 break;
             case TYPE.DEAD:
                 image.sprite = tileSprites[4];
-                complementImage.gameObject.SetActive(false);
+                complement.gameObject.SetActive(false);
                 break;
             default:
                 break;
@@ -135,12 +146,16 @@ public class Tile : MonoBehaviour
         return index;
     }
 
-    public int TileEffect(int actualTile)
+    public void PlayTileFeedback()
+    {
+        tileFeedback.PlayFeedbacks();
+    }
+    public int TileEffect(int actualTile, TextMeshProUGUI infoText)
     {
         switch (type)
         {
             case TYPE.NORMAL:
-                
+                infoText.text = "NORMAL TILE";
                 return 1;
             case TYPE.OCA:
                 if (tileSequence.Contains(actualTile))
@@ -152,6 +167,7 @@ public class Tile : MonoBehaviour
                     }
                     else
                     {
+                        infoText.text = "JUMP! TILE";
                         return tileSequence[index + 1];
                     }
                 }
@@ -162,6 +178,7 @@ public class Tile : MonoBehaviour
             case TYPE.BRIDGE:
                 if (tileSequence.Contains(actualTile))
                 {
+                    infoText.text = "BRIDGE TILE";
                     int index = tileSequence.IndexOf(actualTile);
                     if (index == 0)
                     {
@@ -177,19 +194,19 @@ public class Tile : MonoBehaviour
                     return 1;
                 }
             case TYPE.DELAY:
-                
+                infoText.text = "THE FARMERS TRAPPED YOU!";
                 return -1;
             case TYPE.SUPERDELAY:
-                
+                infoText.text = "THE FARMERS TRAPPED YOU";
                 return -3;
             case TYPE.BACK:
-                
+                infoText.text = "THE WATER CURRENT IS TOO STRONG...";
                 return 0;
             case TYPE.PRISON:
-                
+                infoText.text = "THE FARMERS TRAPPED YOU";
                 return -3;
             case TYPE.DEAD:
-                
+                infoText.text = "DEAD TILE";
                 return -100;
             default:
                 return 100;
