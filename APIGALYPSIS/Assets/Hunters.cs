@@ -20,7 +20,7 @@ public class Hunters : MonoBehaviour
     [SerializeField]
     private float counter = 0f;
 
-    private float speed = 0.02f;
+    private float speed = 0.065f;
 
     public float SetSpeed
     {

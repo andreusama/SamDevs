@@ -3244,12 +3244,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnLogic: {fileID: 837897903}
+  TheGang: {fileID: 0}
+  huntersGO: {fileID: 0}
   actualPhase: 0
   scene: 1
   waypoints: []
   wayPointsParent: {fileID: 168113043}
   Pig: {fileID: 1319974430}
   aimWaypoint: 0
+  bufferWaypoint: 0
+  movingTime: 1
+  timeCounter: 0
   rollButton: {fileID: 1930989067}
   diceResult: {fileID: 910908107}
   winIndicator: {fileID: 1943271052}
@@ -3282,6 +3287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11c2138248c795e41acdc28b9e0d3b90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sucess: 0
   gameState: 0
   actualPlayer: 0
   rollButton: {fileID: 1930989067}
@@ -3299,6 +3305,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8556d1cda935484b90060f5b9b0b050, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RollFeedback: {fileID: 0}
+  TurnChangeFeedbacks: {fileID: 0}
+  loseFeedback: {fileID: 0}
+  winFeedback: {fileID: 0}
+  showDelayBar: {fileID: 0}
+  hideDelayBar: {fileID: 0}
+  delayBarScript: {fileID: 0}
 --- !u!1001 &848799677
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5386,6 +5399,7 @@ MonoBehaviour:
   boardPos: 0
   movementState:
     state: 0
+    direction: 0
     turnsBlocked: 0
   newPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &1319974432

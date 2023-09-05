@@ -165,6 +165,37 @@ public class BoardMovement : MonoBehaviour
     }
     public void Update()
     {
+        //create a input for keys 1,2,3 and 4
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            turnLogic.buttonText.text = "ROLLING...";
+
+            StartCoroutine(AnimateDiceRoll(11));
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            turnLogic.buttonText.text = "ROLLING...";
+
+            StartCoroutine(AnimateDiceRoll(18));
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            turnLogic.buttonText.text = "ROLLING...";
+
+            StartCoroutine(AnimateDiceRoll(30));
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            turnLogic.buttonText.text = "ROLLING...";
+
+            StartCoroutine(AnimateDiceRoll(41));
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            turnLogic.buttonText.text = "ROLLING...";
+
+            StartCoroutine(AnimateDiceRoll(57));
+        }
         //create a debug where i press G 
         if (Input.GetKeyDown(KeyCode.G))
         {
@@ -191,7 +222,8 @@ public class BoardMovement : MonoBehaviour
                     else
                         waypoints[bufferWaypoint + 1].GetComponentInChildren<Tile>().PlayTileFeedback();
 
-                    turnLogic.buttonText.text = "MOVING...";
+                    if (turnLogic != null)
+                        turnLogic.buttonText.text = "MOVING...";
                     
                     //check if when we moving the tile changes state and is dead
                     
@@ -653,9 +685,16 @@ public class BoardMovement : MonoBehaviour
             //if the counter is greater than 10
         }
 
-        result = diceRoll.ToString();
+        if (diceRoll > 6)
+        {
+            result = "6";
+        }
+        else
+        {
+            result = diceRoll.ToString();
+        }
 
-        
+
         //set the text of the dice result to the dice roll
         SetDiceResult(diceRoll.ToString());
         //set the pig to the waypoint position
