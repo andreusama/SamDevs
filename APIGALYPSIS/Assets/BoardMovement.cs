@@ -266,8 +266,6 @@ public class BoardMovement : MonoBehaviour
 
                 int blockCase = GetTileOfWaypoint(waypoints[aimWaypoint]).TileEffect(aimWaypoint, winIndicator);
 
-                int deadCase = GetTileOfWaypoint(waypoints[aimWaypoint]).TileEffect(aimWaypoint, winIndicator);
-
                 if (jumpCase != 1 && jumpCase >= 0)
                 {
                     Pig.transform.position = waypoints[GetTileOfWaypoint(waypoints[aimWaypoint]).TileEffect(aimWaypoint, winIndicator)].position;
@@ -287,6 +285,9 @@ public class BoardMovement : MonoBehaviour
                     Debug.Log("Block case was: " + Mathf.Abs(blockCase));
                     Pig.transform.GetComponent<Player>().MovementState.TurnsBlocked += Mathf.Abs(blockCase);
                 }
+                
+                Debug.Log("Debug Log Dead Case moment: " + GetTileOfWaypoint(waypoints[Pig.transform.GetComponent<Player>().BoardPos]).TileEffect(Pig.transform.GetComponent<Player>().BoardPos, winIndicator));
+                int deadCase = GetTileOfWaypoint(waypoints[Pig.transform.GetComponent<Player>().BoardPos]).TileEffect(Pig.transform.GetComponent<Player>().BoardPos, winIndicator);
 
                 if (deadCase == -100)
                 {

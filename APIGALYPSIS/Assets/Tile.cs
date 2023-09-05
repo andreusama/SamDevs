@@ -15,6 +15,8 @@ public class Tile : MonoBehaviour
     public GameObject FX;
 
     public bool deadTile = false;
+
+    public bool dirty = false;
     public enum TYPE
     {
         NORMAL,
@@ -37,6 +39,11 @@ public class Tile : MonoBehaviour
 
     public void SetType(TYPE type)
     {
+        if (type != this.type)
+        {
+            Debug.Log("Different!");
+            dirty = true;
+        }
         this.type = type;
     }
 
