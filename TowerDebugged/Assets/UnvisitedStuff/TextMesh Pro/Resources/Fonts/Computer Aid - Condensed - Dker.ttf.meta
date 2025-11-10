@@ -1,0 +1,25 @@
+fileFormatVersion: 2
+guid: d3aded0d5fe062645bd1e9c35f6c9398
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Computer Aid
+  fontNames:
+  - Computer Aid
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 3e80a4cb12cd2a746bffe1e51bb25950, type: 3}
+  - {fileID: 12800000, guid: 5c3c437dca64041409d76d9cdf8d6f38, type: 3}
+  - {fileID: 12800000, guid: aedc120e1fcd3c549a8a08f7e0bfb5cc, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

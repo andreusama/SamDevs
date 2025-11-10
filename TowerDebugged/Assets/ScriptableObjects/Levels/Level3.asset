@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce80c9f9f4806144c9d4825cf3aab5a5, type: 3}
+  m_Name: Level3
+  m_EditorClassIdentifier: 
+  flavorName: King Cyryus the not that great
+  objectives: {fileID: 11400000, guid: c1debea11431d5c41b7c2802e1fb8e92, type: 2}
+  rewards:
+  - {fileID: 11400000, guid: 1c41a6fc61ef12c4e8f87b3f2c0c3030, type: 2}
+  - {fileID: 11400000, guid: 89bc48e7416e8874e91a5785008b7c43, type: 2}
+  updateParent: 0
+  locked: 1
+  bioma: {fileID: 11400000, guid: 76cad6c42f575c14696bc326a06dfd2b, type: 2}
+  weather: 0
+  state: 1
+  id: 2
+  tier: 0
+  signCountdown: 2.2
+  signTicks: 4
+  actuallyPlaying: 0
+  isTutorial: 0
+  projectedGold: 8980
+  projectedXp: 8136
+  description: 'I am Cyryus the great! I must reign this lands with the tower YOU
+    are going to make for me. '

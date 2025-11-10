@@ -1,0 +1,173 @@
+fileFormatVersion: 2
+guid: 559b3f59a41b3e943bc0a8e9a39a898a
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Aigua_Aigua
+    100002: Aigua_Barco_1
+    100004: Aigua_Barco_2
+    100006: Aigua_Pedres
+    100008: Arbres_Castell
+    100010: Base_Bosc_Bosc
+    100012: Bosc_Arbres
+    100014: Bosc_Pedres
+    100016: Castell_Castell
+    100018: //RootNode
+    100020: Volc__Base_Volc_
+    100022: Volc__Base_Volc_1
+    100024: Volc__Base_Volc_2
+    100026: Volc__Lava
+    100028: Volc__Volc_
+    400000: Aigua_Aigua
+    400002: Aigua_Barco_1
+    400004: Aigua_Barco_2
+    400006: Aigua_Pedres
+    400008: Arbres_Castell
+    400010: Base_Bosc_Bosc
+    400012: Bosc_Arbres
+    400014: Bosc_Pedres
+    400016: Castell_Castell
+    400018: //RootNode
+    400020: Volc__Base_Volc_
+    400022: Volc__Base_Volc_1
+    400024: Volc__Base_Volc_2
+    400026: Volc__Lava
+    400028: Volc__Volc_
+    2100000: Aigua_AiguaMat
+    2100002: Aigua_Barco_1Mat
+    2100004: Aigua_Barco_2Mat
+    2100006: Aigua_PedresMat
+    2100008: Arbres_CastellMat
+    2100010: Base_Bosc_BoscMat
+    2100012: Bosc_ArbresMat
+    2100014: Bosc_PedresMat
+    2100016: Castell_CastellMat
+    2100018: Volc__Base_Volc_Mat
+    2100020: Volc__Base_Volc_1Mat
+    2100022: Volc__Base_Volc_2Mat
+    2100024: Volc__LavaMat
+    2100026: Volc__Volc_Mat
+    2300000: Aigua_Aigua
+    2300002: Aigua_Barco_1
+    2300004: Aigua_Barco_2
+    2300006: Aigua_Pedres
+    2300008: Arbres_Castell
+    2300010: Base_Bosc_Bosc
+    2300012: Bosc_Arbres
+    2300014: Bosc_Pedres
+    2300016: Castell_Castell
+    2300018: Volc__Base_Volc_
+    2300020: Volc__Base_Volc_1
+    2300022: Volc__Base_Volc_2
+    2300024: Volc__Lava
+    2300026: Volc__Volc_
+    3300000: Aigua_Aigua
+    3300002: Aigua_Barco_1
+    3300004: Aigua_Barco_2
+    3300006: Aigua_Pedres
+    3300008: Arbres_Castell
+    3300010: Base_Bosc_Bosc
+    3300012: Bosc_Arbres
+    3300014: Bosc_Pedres
+    3300016: Castell_Castell
+    3300018: Volc__Base_Volc_
+    3300020: Volc__Base_Volc_1
+    3300022: Volc__Base_Volc_2
+    3300024: Volc__Lava
+    3300026: Volc__Volc_
+    4300000: Aigua_Aigua
+    4300002: Aigua_Barco_1
+    4300004: Aigua_Barco_2
+    4300006: Aigua_Pedres
+    4300008: Arbres_Castell
+    4300010: Base_Bosc_Bosc
+    4300012: Bosc_Arbres
+    4300014: Bosc_Pedres
+    4300016: Castell_Castell
+    4300018: Volc__Base_Volc_
+    4300020: Volc__Base_Volc_1
+    4300022: Volc__Base_Volc_2
+    4300024: Volc__Lava
+    4300026: Volc__Volc_
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

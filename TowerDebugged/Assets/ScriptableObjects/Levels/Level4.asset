@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce80c9f9f4806144c9d4825cf3aab5a5, type: 3}
+  m_Name: Level4
+  m_EditorClassIdentifier: 
+  flavorName: William of Midness
+  objectives: {fileID: 11400000, guid: 1b131a50513f8cc46afbaa22030a7dcf, type: 2}
+  rewards:
+  - {fileID: 11400000, guid: ac769749f3fa2614fb0d0600c69f4295, type: 2}
+  - {fileID: 11400000, guid: dc3bed57228310c4994c4d4a258d5b76, type: 2}
+  updateParent: 0
+  locked: 1
+  bioma: {fileID: 11400000, guid: 402a71396ce9e0b4b8e6368c751e5bf0, type: 2}
+  weather: 0
+  state: 1
+  id: 3
+  tier: 0
+  signCountdown: 1.5
+  signTicks: 6
+  actuallyPlaying: 0
+  isTutorial: 0
+  projectedGold: 65325
+  projectedXp: 115050
+  description: I want a tower but please don't make it too good... It can call the
+    attention of the neighbour kings and I don't need to expand either be in danger.

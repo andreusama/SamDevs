@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6c499590ea80426e81769fca37d9af2, type: 3}
+  m_Name: StoneHammer
+  m_EditorClassIdentifier: 
+  name: Wooden Hammer
+  cooldownTime: 0.1
+  id: 2
+  type: weapon
+  sprite: {fileID: 21300000, guid: 1943129527c306d4bb6f358c6a270123, type: 3}
+  stat: 100
+  actualStat: 0
+  isBuff: 0
+  buff: {fileID: 0}
+  broke: 0
+  fx: {fileID: 8300000, guid: 2940510a081a100498494b5ed8575e8f, type: 3}
+  goldHit: 0
+  quantity: 1
+  internalBar:
+    Vbarra: {fileID: 0}
+    vidactual: 0
+    vidaM: 0
+  coldCd: 0.1
+  level: 23
+  visualLevel: 0
+  levelUpPrice: 7475
+  lastLevelUpPrice: 6875
+  rareness: 0
+  baseDamage: 0
+  criticalChance: 25
+  scaleFactor: 30
+  durability: 47
+  maxDurability: 100
+  defuffScale: 1
+  originalPrice: 250

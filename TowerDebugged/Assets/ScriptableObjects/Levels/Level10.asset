@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce80c9f9f4806144c9d4825cf3aab5a5, type: 3}
+  m_Name: Level10
+  m_EditorClassIdentifier: 
+  flavorName: 'King Theo '
+  objectives: {fileID: 11400000, guid: 29c201309166a9440b62c67146e10528, type: 2}
+  rewards:
+  - {fileID: 11400000, guid: 3235fea79f009294fa5b0264ffae508e, type: 2}
+  - {fileID: 11400000, guid: 1e28106e13052174cabdd187a3ea0672, type: 2}
+  updateParent: 0
+  locked: 0
+  bioma: {fileID: 11400000, guid: ffca878bf2b144247a6b6a8144242204, type: 2}
+  weather: 0
+  state: 1
+  id: 9
+  tier: 2
+  signCountdown: 0.5
+  signTicks: 10
+  actuallyPlaying: 1
+  isTutorial: 0
+  projectedGold: 700247700
+  projectedXp: 2.8283234e+10
+  description: Do me a favour and build the highest tower in the planet!

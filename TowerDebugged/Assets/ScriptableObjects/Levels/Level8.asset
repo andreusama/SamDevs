@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce80c9f9f4806144c9d4825cf3aab5a5, type: 3}
+  m_Name: Level8
+  m_EditorClassIdentifier: 
+  flavorName: King Tow'er Less
+  objectives: {fileID: 11400000, guid: 4cc6671cd8c82f849bc07e76addda708, type: 2}
+  rewards:
+  - {fileID: 11400000, guid: 8a1e830110dbc794fbacce381062259c, type: 2}
+  - {fileID: 11400000, guid: e7c0b3c569a50004dbd55cb2dd0d419a, type: 2}
+  updateParent: 0
+  locked: 0
+  bioma: {fileID: 11400000, guid: 76cad6c42f575c14696bc326a06dfd2b, type: 2}
+  weather: 0
+  state: 0
+  id: 7
+  tier: 2
+  signCountdown: 1.5
+  signTicks: 6
+  actuallyPlaying: 0
+  isTutorial: 0
+  projectedGold: 37060044
+  projectedXp: 559643700
+  description: I've dreamed of this tower for my hole life, and I have four farmers
+    waiting for my protection!

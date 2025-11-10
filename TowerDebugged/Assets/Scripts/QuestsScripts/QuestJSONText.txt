@@ -1,0 +1,49 @@
+{
+	"quest": [
+		{
+			"title": "Starting",
+			"objective": "Just starting",
+			"goldReward": 100,
+			"xpReward": 100,
+			"typeIndex": 0,
+			"currentProgress": 0,
+			"aimProgress": 1
+		},
+		{
+			"title": "Mid Way",
+			"objective": "Halfway there",
+			"goldReward": 100,
+			"xpReward": 100,
+			"typeIndex": 0,
+			"currentProgress": 0,
+			"aimProgress": 3
+		},
+		{
+			"title": "Almost there",
+			"objective": "Objective",
+			"goldReward": 100,
+			"xpReward": 100,
+			"typeIndex": 0,
+			"currentProgress": 0,
+			"aimProgress": 4
+		},
+		{
+			"title": "Time is money!",
+			"objective": "Reach the deadline",
+			"goldReward": 100,
+			"xpReward": 100,
+			"typeIndex": 1,
+			"currentProgress": 0,
+			"aimProgress": 5
+		},
+		{
+			"title": "Winter is coming",
+			"objective": "Survive to the bioma",
+			"goldReward": 100,
+			"xpReward": 100,
+			"typeIndex": 2,
+			"currentProgress": 0,
+			"aimProgress": 1
+		}
+	]
+}

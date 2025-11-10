@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aa0a031843064579a87eaa022247b32, type: 3}
+  m_Name: Contract
+  m_EditorClassIdentifier: 
+  name: Workers Contract
+  cooldownTime: 1
+  id: 5
+  type: contract
+  sprite: {fileID: 21300000, guid: 2d9e1c1ee0112a14e85ab5538cbc5d12, type: 3}
+  stat: 1
+  actualStat: 0
+  isBuff: 1
+  buff: {fileID: 11400000, guid: 0aaec6854c4f65647a6f26bbc6466199, type: 2}
+  broke: 1
+  fx: {fileID: 8300000, guid: 476cd941f063588488bdd615c2802288, type: 3}
+  goldHit: 0
+  quantity: 0
+  internalBar:
+    Vbarra: {fileID: 0}
+    vidactual: 0
+    vidaM: 0
+  coldCd: 1
+  level: 0
+  visualLevel: 0
+  levelUpPrice: 0
+  lastLevelUpPrice: 0
+  rareness: 0
+  baseDamage: 2.5
+  numberTicks: 3000
+  scaleFactor: 80
+  timeBtwTicks: 0.1

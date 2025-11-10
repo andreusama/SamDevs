@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce80c9f9f4806144c9d4825cf3aab5a5, type: 3}
+  m_Name: Level5
+  m_EditorClassIdentifier: 
+  flavorName: King John
+  objectives: {fileID: 11400000, guid: 7a9896facffc67b488c3043d289075e2, type: 2}
+  rewards:
+  - {fileID: 11400000, guid: 5de21569cc7daea4e976948782674f3a, type: 2}
+  - {fileID: 11400000, guid: 8a5ac6dedf6de3543b15aeda82c075b7, type: 2}
+  updateParent: 0
+  locked: 0
+  bioma: {fileID: 11400000, guid: 76cad6c42f575c14696bc326a06dfd2b, type: 2}
+  weather: 0
+  state: 0
+  id: 4
+  tier: 1
+  signCountdown: 2.1
+  signTicks: 5
+  actuallyPlaying: 0
+  isTutorial: 0
+  projectedGold: 363160
+  projectedXp: 1149393
+  description: I am Jhon, a king named Jhon, and i demand a tower with my name.

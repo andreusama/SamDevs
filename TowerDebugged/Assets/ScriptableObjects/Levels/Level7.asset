@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce80c9f9f4806144c9d4825cf3aab5a5, type: 3}
+  m_Name: Level7
+  m_EditorClassIdentifier: 
+  flavorName: King Edward the Wanderer II
+  objectives: {fileID: 11400000, guid: 50e6bb68bf8f871468362feed7797907, type: 2}
+  rewards:
+  - {fileID: 11400000, guid: 220999ad62fe1f0499bec2c4cf037bf8, type: 2}
+  - {fileID: 11400000, guid: ebbb81f2ee979fe46b92967960c3ce54, type: 2}
+  updateParent: 0
+  locked: 0
+  bioma: {fileID: 11400000, guid: 40a2c16f2c8e12144a73548b446c0bf4, type: 2}
+  weather: 0
+  state: 0
+  id: 6
+  tier: 1
+  signCountdown: 0.8
+  signTicks: 8
+  actuallyPlaying: 0
+  isTutorial: 0
+  projectedGold: 8296475
+  projectedXp: 75759360
+  description: My family has been wandering for generations, all the kings give us
+    protection as we're the Wanderers but that has come to an end, do me a favour...

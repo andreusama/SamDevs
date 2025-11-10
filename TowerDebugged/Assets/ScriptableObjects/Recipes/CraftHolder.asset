@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e661cba79398704090373bce088a96d, type: 3}
+  m_Name: CraftHolder
+  m_EditorClassIdentifier: 
+  forgeRecipes:
+  - {fileID: 11400000, guid: 1293f7617e2f96742950f8b947efaa04, type: 2}
+  - {fileID: 11400000, guid: aedf728f196a36846a8cdc9a6c2c0096, type: 2}
+  - {fileID: 11400000, guid: faeac82b5ae204f4fbabf60365d17bf6, type: 2}
+  - {fileID: 11400000, guid: fef13fdb69d14184f9939b531002ec03, type: 2}
+  magicRecipes:
+  - {fileID: 11400000, guid: 36dab5708fe0e4d4687562b78e9a6173, type: 2}
+  contractRecipes:
+  - {fileID: 11400000, guid: 9ae9a6cf041bd0e4e93e1e8f59575378, type: 2}
+  - {fileID: 11400000, guid: 4d4d4fc394a2565488cc85908e469fdf, type: 2}
+  - {fileID: 11400000, guid: 4a7214372982c0345b906411ad894c43, type: 2}
